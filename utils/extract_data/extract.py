@@ -11,7 +11,7 @@ HEADERS = {
     )
 }
 
-BASE_URL = "https://fashion-studio.dicoding.dev/?page="
+BASE_URL = "https://fashion-studio.dicoding.dev/"
 MAX_PAGES = 50
 TARGET_DATA = 1000
 
@@ -76,22 +76,18 @@ def scrape_main():
     list: Daftar seluruh produk yang berhasil discrape
     """
     all_products = []
-    
     for page in range(1, MAX_PAGES + 1):
         try:
-            print(f"Scraping page {page}...")
-            url = f"{BASE_URL}{page}"
+            if page == 1:
+                url = BASE_URL
+            else:
+                url = f"{BASE_URL}page{page}"
+            print(f"Scraping URL: {url}")
             page_products = scrape_page(url)
-            print(f"Ditemukan {len(page_products)} produk di halaman {page}")
+            print(f"Found {len(page_products)} products on page {page}")
             all_products.extend(page_products)
             time.sleep(1)
         except Exception as e:
-            print(f"Error saat scraping halaman {page}: {e}")
-
-    print(f"\nTotal data sebelum filtering: {len(all_products)}")
-
-    cleaned_products = [p for p in all_products if p["Title"] != "Unknown Product"]
-
-    print(f"Total data setelah filtering: {len(cleaned_products)}")
-    
-    return cleaned_products
+            print(f"Error scraping page {page}: {e}")
+    print(f"\nTotal data scraping: {len(all_products)}")
+    return all_products

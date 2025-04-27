@@ -29,18 +29,15 @@ def transform_data(data):
         if not required_columns.issubset(df.columns):
             missing_cols = required_columns - set(df.columns)
             print(f"Terdapat kolom yang tidak ditemukan: {missing_cols}")
-            return pd.DataFrame()
 
         df["Price"] = pd.to_numeric(df["Price"], errors="coerce") * EXCHANGE_RATE
-
         df["Rating"] = df["Rating"].astype(str).str.extract(r"([\d.]+)").astype(float)
-
         df.dropna(subset=["Rating"], inplace=True)
-
         df["Colors"] = pd.to_numeric(df["Colors"], errors="coerce").fillna(0).astype(int, errors="ignore")
 
         df.drop_duplicates(inplace=True)
         df.dropna(inplace=True)
+        df = df[df["Title"] != "Unknown Product"]
 
         print("Proses transformasi selesai.")
         return df

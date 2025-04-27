@@ -7,7 +7,7 @@ class TestLoadPostgre(unittest.TestCase):
 
     @patch("utils.load_data.load_postgre.psycopg2.connect")
     def test_load_to_postgres_success(self, mock_connect):
-        """Menguji apakah data berhasil dimasukkan ke PostgreSQL dengan koneksi yang valid"""
+        # Menguji apakah data berhasil dimasukkan ke PostgreSQL dengan koneksi yang valid
         mock_conn = MagicMock()
         mock_cursor = MagicMock()
         mock_connect.return_value = mock_conn
@@ -35,7 +35,7 @@ class TestLoadPostgre(unittest.TestCase):
 
     @patch("utils.load_data.load_postgre.psycopg2.connect", side_effect=Exception("Database connection error"))
     def test_load_to_postgres_connection_error(self, mock_connect):
-        """Menguji apakah function menangani kesalahan koneksi ke PostgreSQL"""
+        # Menguji apakah function menangani kesalahan koneksi ke PostgreSQL
         data = {
             "title": ["Product B"],
             "price": [200000],
@@ -54,7 +54,7 @@ class TestLoadPostgre(unittest.TestCase):
 
     @patch("utils.load_data.load_postgre.psycopg2.connect")
     def test_load_to_postgres_empty_dataframe(self, mock_connect):
-        """Menguji apakah function menangani dataframe kosong dengan benar"""
+        # Menguji apakah function menangani dataframe kosong dengan benar
         mock_conn = MagicMock()
         mock_connect.return_value = mock_conn
         

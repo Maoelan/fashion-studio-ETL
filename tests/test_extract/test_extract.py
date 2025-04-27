@@ -7,7 +7,7 @@ class TestExtract(unittest.TestCase):
 
     @patch("utils.extract_data.extract.requests.get")
     def test_scrape_page_success(self, mock_get):
-        """Menguji scraping dengan HTML yang valid"""
+        # Menguji scraping dengan HTML yang valid
         mock_get.return_value.status_code = 200
         mock_get.return_value.text = """
             <div class="collection-card">
@@ -30,27 +30,27 @@ class TestExtract(unittest.TestCase):
             "Size": "M",
             "Gender": "Unisex"
         }
-        
+
         for key in expected_data:
             self.assertEqual(result[0][key], expected_data[key])
 
     @patch("utils.extract_data.extract.requests.get")
     def test_scrape_page_invalid_url(self, mock_get):
-        """Menguji scraping pada URL yang tidak valid"""
+        # Menguji scraping pada URL yang tidak valid
         mock_get.side_effect = requests.exceptions.RequestException("Connection error")
         result = scrape_page("https://invalid-url.com")
         self.assertEqual(result, [])
 
     @patch("utils.extract_data.extract.requests.get")
     def test_scrape_page_timeout(self, mock_get):
-        """Menguji scraping saat timeout terjadi"""
+        # Menguji scraping saat timeout terjadi
         mock_get.side_effect = requests.exceptions.Timeout("Request timed out")
         result = scrape_page("https://timeout-url.com")
         self.assertEqual(result, [])
 
     @patch("utils.extract_data.extract.requests.get")
     def test_scrape_page_no_products(self, mock_get):
-        """Menguji scraping pada halaman tanpa produk"""
+        # Menguji scraping pada halaman tanpa produk
         mock_get.return_value.status_code = 200
         mock_get.return_value.text = "<div>No products found</div>"
         result = scrape_page("https://empty-page.com")
@@ -58,7 +58,7 @@ class TestExtract(unittest.TestCase):
 
     @patch("utils.extract_data.extract.requests.get")
     def test_scrape_page_missing_elements(self, mock_get):
-        """Menguji scraping pada halaman dengan elemen yang hilang"""
+        # Menguji scraping pada halaman dengan elemen yang hilang
         mock_get.return_value.status_code = 200
         mock_get.return_value.text = """
             <div class="collection-card">

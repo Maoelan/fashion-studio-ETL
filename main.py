@@ -25,6 +25,8 @@ def main():
         load_to_postgres(transformed_df)
         load_to_google_sheets(transformed_df)
 
+        print(f"Jumlah data setelah ETL: {len(transformed_df)}")
+
         print("\nProses ETL selesai")
 
     except Exception as e:

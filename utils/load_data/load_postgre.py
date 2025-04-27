@@ -5,11 +5,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 DB_CONFIG = {
-    "dbname": "[Database]",
-    "user": "[Username]", # silahkan ganti dengan username PostgreSQL kamu
-    "password": "[Password]", # silahkan ganti dengan password PostgreSQL kamu
-    "host": "[Host]",
-    "port": "[Port]"
+    "dbname": "[PSQL_DBNAME]",
+    "user": "[PSQL_USERNAME]",
+    "password": "[PSQL_PASSWORD]",
+    "host": "[PSQL_HOST]",
+    "port": "[PSQL_PORT]"
 }
 
 def load_to_postgres(df, table_name="products"):
