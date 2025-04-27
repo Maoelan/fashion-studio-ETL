@@ -88,6 +88,6 @@ def scrape_main():
             all_products.extend(page_products)
             time.sleep(1)
         except Exception as e:
-            print(f"Error scraping page {page}: {e}")
+            print(f"Error scraping halaman {page}: {e}")
     print(f"\nTotal data scraping: {len(all_products)}")
     return all_products
