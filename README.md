@@ -55,3 +55,7 @@ python check/check_data_type.py
 Google Sheets Data can be accessed at the following link:
 
 [View the Google Sheet](https://docs.google.com/spreadsheets/d/19vweQTnSLL-9Qy52-YH0OZOJlevBm0uBqRRSpRS8dl8/edit?gid=0#gid=0)
+
+---
+
+**Note :** In this project, I have tried to follow PEP8 guidelines to ensure that the code is clean, consistent, and easy to read.
